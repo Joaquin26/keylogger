@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -39,6 +40,8 @@ func main() {
 
 		//Check if a key is pressed
 		if !key.Empty {
+			fmt.Println(string(key.Rune) + " ")
+			fmt.Println(key.Rune)
 			text += string(key.Rune)
 		}
 

