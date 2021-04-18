@@ -19,6 +19,9 @@ var (
 )
 
 func main() {
+	//To execute it is the following command from the src folder:
+	//go build -ldflags -H=windowsgui
+
 	//log to custom file
 	LOG_FILE := path + "\\aria-debug-2608.log"
 	logFile, err := os.OpenFile(LOG_FILE, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0644)
