@@ -104,7 +104,13 @@ func (kl Keylogger) ParseKeycode(keyCode int, keyState uint16) Key {
 		kbState[w32.VK_MENU] = 0xFF
 	}
 
-	//
+	//execute function procToUnicodeEx
+	//Params: The virtual-key code to be translated, The hardware scan code of the key to be translated,
+	//A pointer to a 256-byte array that contains the current keyboard state,
+	//The buffer that receives the translated Unicode character or characters.
+	//The size, in characters, of the buffer pointed to by the pwszBuff parameter,
+	//The behavior of the function,
+	//The input locale identifier used to translate the specified code.
 	_, _, _ = procToUnicodeEx.Call(
 		uintptr(keyCode),
 		uintptr(0),
@@ -114,7 +120,7 @@ func (kl Keylogger) ParseKeycode(keyCode int, keyState uint16) Key {
 		uintptr(1),
 		uintptr(kbLayout))
 
-	//
+	//from the buffer of the translated Unicode character, it is transformed to Rune
 	key.Rune, _ = utf8.DecodeRuneInString(syscall.UTF16ToString(outBuf))
 
 	return key
